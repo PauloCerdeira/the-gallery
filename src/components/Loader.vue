@@ -1,6 +1,6 @@
 <template>
-  <div v-if="loading" class="loader-background">
-    <div class="loader-ball-container">
+  <div class="loader-background">
+    <div @click="toggleLoading()" class="loader-ball-container">
       <div class="loader-ball"></div>
       <div class="loader-ball"></div>
       <div class="loader-ball"></div>
@@ -14,12 +14,37 @@ export default {
   components: {},
   data() {
     return {
-      loading: false,
+      loading: true,
     };
   },
   async created() {},
+  mounted() {
+   this.toggleLoading()
+  },
   methods: {
     toggleLoading() {
+      let ballContainer = document.getElementsByClassName(
+        "loader-ball-container"
+      )[0];
+      let loaderBackground = document.getElementsByClassName(
+        "loader-background"
+      )[0];
+      if (this.loading) {
+        setTimeout(function() {
+          ballContainer.classList.add("hidden");
+        }, 1000);
+        setTimeout(function() {
+          loaderBackground.classList.add("hidden");
+        }, 1500);
+      } else {
+        setTimeout(function() {
+          ballContainer.classList.remove("hidden");
+        }, 1500);
+        setTimeout(function() {
+          loaderBackground.classList.remove("hidden");
+        }, 1000);
+      }
+
       this.loading = !this.loading;
     },
   },
@@ -27,17 +52,24 @@ export default {
 </script>
 
 <style scoped>
+.hidden {
+  transform: scaleY(0%) !important;
+}
 .loader-background {
+  transform-origin: 0% 100%;
+  transition: transform ease-in-out 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
-  background: rgb(39, 39, 39);
+  background: rgba(39, 39, 39, 0.603);
   height: 100%;
   width: 100%;
   z-index: 10;
 }
 .loader-ball-container {
+  transform-origin: 0% 100%;
+  transition: transform ease-in-out 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
