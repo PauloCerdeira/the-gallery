@@ -1,4 +1,5 @@
 <template>
+  <Loader />
   <div class="hall-container">
     <div @click="move(-1)" class="left-move">
       <i class="fas fa-arrow-left"></i>
@@ -43,9 +44,12 @@
 </template>
 
 <script>
+import Loader from '../components/Loader'
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Loader
+  },
   data() {
     return {
       index: 0,
@@ -115,7 +119,7 @@ export default {
 
 <style scoped>
 .hall-container {
-  transition: background ease-in 0.7s;
+  transition: background ease-in 0.3s;
   align-items: center;
   align-content: center;
   display: flex;
@@ -136,7 +140,7 @@ export default {
   background: rgba(0, 0, 0, 0.247);
   color: white;
   font-size: 50px;
-  box-shadow: rgb(0 0 0 / 24%) 1px -1px 12px 20px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 0px 11px 20px;
 }
 .left-move:hover {
   transform: translateX(20px);
@@ -172,6 +176,9 @@ export default {
   margin: 5%;
 }
 .info-container {
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 24%) 1px -1px 12px 20px;
+  background:  rgba(0, 0, 0, 0.247);
   text-align: left;
   position: relative;
   margin: 5%;
@@ -230,7 +237,6 @@ export default {
   border: 2px solid white;
   box-shadow: inset white 0px 0px 13px 5px;
 }
-
 .exhibit-button-container {
   position: absolute;
   bottom: 0px;
